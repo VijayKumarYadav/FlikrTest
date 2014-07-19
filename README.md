@@ -1,7 +1,7 @@
 FlikrTest
 =========
 
-Using the flickr API write a small app in any language or for any platform you wish that lets the user browse through the flickr results from search for "squirrel". You can choose to lay out the app as you wish but the following information should be displayed for each result:
+The project is a test project just to use flickr API. It allows user to browse through the flickr results from search for "squirrel" and show following information
 
     * The image itself
 
