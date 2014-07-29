@@ -26,12 +26,12 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		// to give support on lower android version
-		FragmentManager mFragManager = getSupportFragmentManager();
+		FragmentManager fragManager = getSupportFragmentManager();
 
 		// Create the list fragment 
-		if (mFragManager.findFragmentById(android.R.id.content) == null) {
+		if (fragManager.findFragmentById(android.R.id.content) == null) {
 			DataListFragment list = new DataListFragment();
-			mFragManager.beginTransaction().add(android.R.id.content, list).commit();
+			fragManager.beginTransaction().add(android.R.id.content, list).commit();
 		}
 	}
 
@@ -42,7 +42,7 @@ public class MainActivity extends FragmentActivity {
 	public static class DataListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<Model>> {
 
 		/** Adapter for List */
-		CustomArrayAdapter mAdapter;
+		CustomArrayAdapter adapter;
 		
 		@Override
 		public void onActivityCreated(Bundle savedInstanceState) {
@@ -52,8 +52,8 @@ public class MainActivity extends FragmentActivity {
 			setEmptyText("No Data Available");
 
 			// Create an empty adapter, use to display the loaded data.
-			mAdapter = new CustomArrayAdapter(getActivity(), getListView());
-			setListAdapter(mAdapter);
+			adapter = new CustomArrayAdapter(getActivity(), getListView());
+			setListAdapter(adapter);
 
 			// Start out with a progress indicator.
 			setListShown(false);
@@ -67,7 +67,7 @@ public class MainActivity extends FragmentActivity {
 		public void onListItemClick(ListView listview, View v, int position, long id) {
 			Log.i("DataListFragment", "Item clicked: " + id);
 			Intent intent = new Intent(getActivity(),AuthorImagesList.class);
-			intent.putExtra("authorName", mAdapter.getItem(position).getAuthorName());
+			intent.putExtra("authorName", adapter.getItem(position).getAuthorName());
 			startActivity(intent);
 		}
 
@@ -78,7 +78,7 @@ public class MainActivity extends FragmentActivity {
 
 		@Override
 		public void onLoadFinished(Loader<List<Model>> arg0, List<Model> data) {
-			mAdapter.setData(data);
+			adapter.setData(data);
 			// The list should now be shown.
 			if (isResumed()) {
 				setListShown(true);
@@ -89,7 +89,7 @@ public class MainActivity extends FragmentActivity {
 
 		@Override
 		public void onLoaderReset(Loader<List<Model>> arg0) {
-			mAdapter.setData(null);
+			adapter.setData(null);
 		}
 	}
 }

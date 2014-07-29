@@ -27,15 +27,15 @@ public class AuthorImagesList extends FragmentActivity {
 
 		setContentView(R.layout.author_image_frag);
 		// to give support on lower android version
-		FragmentManager mFragManager = getSupportFragmentManager();
+		FragmentManager fragManager = getSupportFragmentManager();
 
 		// Create the list fragment 
-		if (mFragManager.findFragmentById(R.id.list_fragment) == null) {
+		if (fragManager.findFragmentById(R.id.list_fragment) == null) {
 			AuthorImageListFragment listFrag = new AuthorImageListFragment();
 			Bundle bundle = new Bundle();
 			bundle.putString("data",getIntent().getStringExtra("authorName"));
 			listFrag.setArguments(bundle);
-			mFragManager.beginTransaction().add(R.id.list_fragment, listFrag).commit();
+			fragManager.beginTransaction().add(R.id.list_fragment, listFrag).commit();
 		}
 	
 		// back button handling
@@ -54,7 +54,7 @@ public class AuthorImagesList extends FragmentActivity {
 	 */
 	public static class AuthorImageListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<Model>> {
 
-		CustomArrayAdapter mAdapter;
+		CustomArrayAdapter adapter;
 		
 		Loader<List<Model>> loader;
 
@@ -66,8 +66,8 @@ public class AuthorImagesList extends FragmentActivity {
 			setEmptyText("No Data Available");
 
 			// Create an empty adapter, use to display the loaded data.
-			mAdapter = new CustomArrayAdapter(getActivity(), getListView());
-			setListAdapter(mAdapter);
+			adapter = new CustomArrayAdapter(getActivity(), getListView());
+			setListAdapter(adapter);
 
 			// Start out with a progress indicator.
 			setListShown(false);
@@ -89,7 +89,7 @@ public class AuthorImagesList extends FragmentActivity {
 
 		@Override
 		public void onLoadFinished(Loader<List<Model>> arg0, List<Model> data) {
-			mAdapter.setData(data);
+			adapter.setData(data);
 			// The list should now be shown.
 			if (isResumed()) {
 				setListShown(true);
@@ -100,7 +100,7 @@ public class AuthorImagesList extends FragmentActivity {
 
 		@Override
 		public void onLoaderReset(Loader<List<Model>> arg0) {
-			mAdapter.setData(null);
+			adapter.setData(null);
 		}
 	}
 }

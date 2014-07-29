@@ -23,14 +23,14 @@ import com.example.flickrtest.AsyncImageLoader.ImageCallback;
  * 
  */
 public class CustomArrayAdapter extends ArrayAdapter<Model> {
-	private final LayoutInflater mInflater;
+	private final LayoutInflater inflater;
 	private ViewCache viewCache;
 	private AsyncImageLoader asyncImageLoader;
 	private ListView listView;
 
 	public CustomArrayAdapter(Context context, ListView listView) {
 		super(context, android.R.layout.simple_list_item_2);
-		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		asyncImageLoader = new AsyncImageLoader();
 		this.listView = listView;
 	}
@@ -56,7 +56,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Model> {
 
 		final View view;
 		if (convertView == null) {
-			view = mInflater.inflate(R.layout.single_item, parent, false);
+			view = inflater.inflate(R.layout.single_item, parent, false);
 			viewCache = new ViewCache(view);
 			view.setTag(viewCache);
 		} else {

@@ -15,7 +15,7 @@ import android.support.v4.content.AsyncTaskLoader;
  */
 public class DataListLoader extends AsyncTaskLoader<List<Model>>{
     
-    List<Model> mModels;
+    List<Model> models;
     String param;
     
     public DataListLoader(Context context) {
@@ -46,7 +46,7 @@ public class DataListLoader extends AsyncTaskLoader<List<Model>>{
             }
         }
         List<Model> oldApps = listOfData;
-        mModels = listOfData;
+        models = listOfData;
 
         if (isStarted()) {
             // If the Loader is currently started, we can immediately
@@ -66,14 +66,14 @@ public class DataListLoader extends AsyncTaskLoader<List<Model>>{
      * Handles a request to start the Loader.
      */
     @Override protected void onStartLoading() {
-        if (mModels != null) {
+        if (models != null) {
             // If we currently have a result available, deliver it
             // immediately.
-            deliverResult(mModels);
+            deliverResult(models);
         }
 
 
-        if (takeContentChanged() || mModels == null) {
+        if (takeContentChanged() || models == null) {
             // If the data has changed since the last time it was loaded
             // or is not currently available, start a load.
             forceLoad();
@@ -113,9 +113,9 @@ public class DataListLoader extends AsyncTaskLoader<List<Model>>{
 
         // At this point we can release the resources associated with 'apps'
         // if needed.
-        if (mModels != null) {
-            onReleaseResources(mModels);
-            mModels = null;
+        if (models != null) {
+            onReleaseResources(models);
+            models = null;
         }
     }
 
